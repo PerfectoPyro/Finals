@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            background-color: #ffdde1;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            color: #d63384;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            font-size: 3em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        .heart {
+            color: red;
+            font-size: 2em;
+            animation: heartbeat 1s infinite;
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .btn {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.5em;
+            cursor: pointer;
+            border-radius: 10px;
+            margin: 10px;
+            position: relative;
+        }
+        .btn:hover {
+            background-color: #d63384;
+        }
+        .valentine-image {
+            width: 300px;
+            margin-top: 20px;
+        }
+        #reject-message {
+            font-size: 1.5em;
+            color: red;
+            display: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            Will you be my Valentine? <span class="heart">❤️</span>
+        </h1>
+        <img src="valentines.jpg" alt="Valentine's Image" class="valentine-image">
+        <div class="buttons">
+            <button class="btn" onclick="acceptLove()">Yes</button>
+            <button class="btn" id="noButton" onclick="moveNoButton()">No</button>
+        </div>
+        <p id="reject-message">You are not allowed to reject! 😈</p>
+        <p id="message" style="display:none; font-size: 1.5em;">Yay! You have no choice! 💖</p>
+    </div>
+
+    <script>
+        let moveCount = 0;
+        const messages = [
+            "You are not allowed to reject! 😈",
+            "Come on, say yes! 😤",
+            "Don't break my heart 💔",
+            "Just give in already! 😆",
+            "No more rejecting! Click YES 😘"
+        ];
+        
+        function moveNoButton() {
+            if (moveCount < 5) {
+                let button = document.getElementById("noButton");
+                let x = Math.random() * window.innerWidth * 0.6;
+                let y = Math.random() * window.innerHeight * 0.6;
+                button.style.position = "absolute";
+                button.style.left = `${x}px`;
+                button.style.top = `${y}px`;
+                document.getElementById("reject-message").innerText = messages[moveCount];
+                document.getElementById("reject-message").style.display = "block";
+                moveCount++;
+            } else {
+                document.getElementById("noButton").style.display = "none";
+                document.getElementById("reject-message").innerText = "No more rejecting! Click YES 😘";
+            }
+        }
+        
+        function acceptLove() {
+            document.getElementById("message").style.display = "block";
+            document.getElementById("noButton").style.display = "none";
+            document.getElementById("reject-message").style.display = "none";
+        }
+    </script>
+</body>
+</html>
